@@ -7,3 +7,6 @@
 [submodule ".\\thirdpart\\gulp"]
 	path = .\\thirdpart\\gulp
 	url = https://gitee.com/mirrors_gulpjs/gulp
+[submodule ".\\thirdpart\\bach"]
+	path = .\\thirdpart\\bach
+	url = https://gitee.com/mirrors_gulpjs/bach

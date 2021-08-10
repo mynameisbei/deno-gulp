@@ -8,7 +8,9 @@ import { EventEmitter } from "https://deno.land/std@0.103.0/node/events.ts";
 import DefaultRegistry from './undertaker-registry.js';
 
 // var tree = require('./lib/tree');
+import tree from './lib/undertaker/tree.js';
 // var task = require('./lib/task');
+import task from './lib/undertaker/task.js';
 // var series = require('./lib/series');
 // var lastRun = require('./lib/last-run');
 // var parallel = require('./lib/parallel');
@@ -30,9 +32,9 @@ function Undertaker(customRegistry) {
 inherits(Undertaker, EventEmitter);
 
 
-// Undertaker.prototype.tree = tree;
+Undertaker.prototype.tree = tree;
 
-// Undertaker.prototype.task = task;
+Undertaker.prototype.task = task;
 
 // Undertaker.prototype.series = series;
 
