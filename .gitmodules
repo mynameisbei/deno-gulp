@@ -1,0 +1,9 @@
+[submodule "thirdpart/undertaker"]
+	path = thirdpart/undertaker
+	url = https://gitee.com/mirrors_gulpjs/undertaker
+[submodule "thirdpart/undertaker-registry"]
+	path = thirdpart/undertaker-registry
+	url = https://gitee.com/mirrors_gulpjs/undertaker-registry
+[submodule ".\\thirdpart\\gulp"]
+	path = .\\thirdpart\\gulp
+	url = https://gitee.com/mirrors_gulpjs/gulp
