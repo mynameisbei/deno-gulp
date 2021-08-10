@@ -10,3 +10,12 @@
 [submodule ".\\thirdpart\\bach"]
 	path = .\\thirdpart\\bach
 	url = https://gitee.com/mirrors_gulpjs/bach
+[submodule ".\\thirdpart\\async-done"]
+	path = .\\thirdpart\\async-done
+	url = https://gitee.com/mirrors_gulpjs/async-done
+[submodule ".\\thirdpart\\now-and-later"]
+	path = .\\thirdpart\\now-and-later
+	url = https://gitee.com/mirrors_gulpjs/now-and-later
+[submodule ".\\thirdpart\\gulp-cli"]
+	path = .\\thirdpart\\gulp-cli
+	url = https://gitee.com/mirrors_gulpjs/gulp-cli
