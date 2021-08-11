@@ -87,27 +87,40 @@ function buildTree(tasks: Task[] = []): MetadataTree[] {
   });
 }
 
-export function series(...tasks: Task[]): Task {
-  const cb = async () => {
-    for (const { callback } of tasks) {
-      await callback();
-    }
-  };
-
+function compose(tasks: Task[], callback: TaskCallBack, name: TaskName): Task {
   const task: Task = {
-    name: TaskName.series,
-    callback: cb,
+    name,
+    callback,
   };
 
   metadata.set(task, {
-    name: task.name,
+    name,
     branch: true,
     tree: {
-      label: TaskName.series,
+      label: name,
       type: MetadataTreeType.fn,
       nodes: buildTree(tasks),
     },
   });
 
   return task;
+}
+
+export function series(...tasks: Task[]): Task {
+  const cb = async () => {
+    for (const { callback } of tasks) {
+      await callback();
+    }
+  };
+  
+  return compose(tasks, cb, TaskName.series);
+}
+
+export function parallel(...tasks: Task[]): Task {
+  const cb = () => {
+    const result = tasks.map(({ callback }) => callback());
+    return Promise.all(result);
+  };
+
+  return compose(tasks, cb, TaskName.parallel);
 }
