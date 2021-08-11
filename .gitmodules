@@ -19,3 +19,6 @@
 [submodule ".\\thirdpart\\gulp-cli"]
 	path = .\\thirdpart\\gulp-cli
 	url = https://gitee.com/mirrors_gulpjs/gulp-cli
+[submodule ".\\thirdpart\\vinyl-fs"]
+	path = .\\thirdpart\\vinyl-fs
+	url = https://gitee.com/mirrors_gulpjs/vinyl-fs

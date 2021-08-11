@@ -1,8 +1,9 @@
+import { logTime } from './index.ts';
 export interface Task {
   name: string | TaskName;
   callback: TaskCallBack;
 }
-export type TaskCallBack = () => Promise<any>;
+export type TaskCallBack = (...args: any[]) => Promise<any>;
 
 export interface MetadataTree {
   label: string | TaskName;
@@ -108,17 +109,17 @@ function compose(tasks: Task[], callback: TaskCallBack, name: TaskName): Task {
 
 export function series(...tasks: Task[]): Task {
   const cb = async () => {
-    for (const { callback } of tasks) {
-      await callback();
+    for (const task of tasks) {
+      await logTime(task);
     }
   };
-  
+
   return compose(tasks, cb, TaskName.series);
 }
 
 export function parallel(...tasks: Task[]): Task {
   const cb = () => {
-    const result = tasks.map(({ callback }) => callback());
+    const result = tasks.map((task) => logTime(task));
     return Promise.all(result);
   };
 

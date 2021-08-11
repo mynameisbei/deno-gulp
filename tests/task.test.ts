@@ -1,11 +1,11 @@
-import { assertEquals } from "https://deno.land/std@0.103.0/testing/asserts.ts";
-// import { noop } from 'https://unpkg.com/lodash-es@4.17.21/lodash.js';
+import { assertEquals } from "https://deno.land/std@0.104.0/testing/asserts.ts";
+import { random } from 'https://unpkg.com/lodash-es@4.17.21/lodash.js';
 import { series, Task, parallel } from '../src/task.ts';
 
 const DELAY = 200;
 
 const getRandomTime = () => {
-  return Math.random() * DELAY;
+  return random(1, 2) * DELAY;
 };
 
 Deno.test("task run sequential", async () => {
