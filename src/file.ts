@@ -53,11 +53,3 @@ export async function dest(path: string, fileDatas: FileData[]) {
 export function clean(path: string) {
   return emptyDir(path);
 }
-
-export async function addNotice(fileData: FileData, notice: string) {
-  const data = new Uint8Array(notice.length);
-  const reader = new StringReader("abcdef");
-  await reader.read(data);
-  fileData.data = concat(data, fileData.data);
-  return fileData;
-}

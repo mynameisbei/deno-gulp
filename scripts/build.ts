@@ -1,12 +1,4 @@
-import { clean, series, Task, addNotice, src, dest } from "../src/index.ts";
-
-async function test() {
-  const datas = await src('src/index-t.ts');
-  for (const data of datas) {
-    await addNotice(data, '// hello this is notice');
-  }
-  return dest('src', datas);
-}
+import { clean, series, Task } from "../src/index.ts";
 
 async function build() {
   await Deno.run({
@@ -20,7 +12,6 @@ async function build() {
 interface Tasks {
   build: Task;
   clean: Task;
-  test: Task;
 }
 
 const tasks: Tasks = {
@@ -32,10 +23,6 @@ const tasks: Tasks = {
     name: "clean",
     callback: () => clean("dist"),
   },
-  test: {
-    name: 'test',
-    callback: test
-  }
 };
 
-series(tasks.clean, tasks.test, tasks.build).callback();
+series(tasks.clean, tasks.build).callback();
