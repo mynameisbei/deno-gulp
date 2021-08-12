@@ -22,3 +22,6 @@
 [submodule ".\\thirdpart\\vinyl-fs"]
 	path = .\\thirdpart\\vinyl-fs
 	url = https://gitee.com/mirrors_gulpjs/vinyl-fs
+[submodule ".\\thirdpart\\vinyl"]
+	path = .\\thirdpart\\vinyl
+	url = https://gitee.com/mirrors_gulpjs/vinyl

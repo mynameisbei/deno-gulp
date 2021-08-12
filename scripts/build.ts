@@ -1,12 +1,18 @@
-import { clean, series, Task } from "../src/index.ts";
+import { clean, dest, series, src, Task } from "../src/index.ts";
 
-async function build() {
-  await Deno.run({
-    cmd: ["deno", "bundle", "--unstable", "src/index-t.ts", "dist/index.js"],
-    stdout: 'null',
-    stdin: 'null',
-    stderr: 'null',
-  }).status();
+// async function build() {
+//   await Deno.run({
+//     cmd: ["deno", "bundle", "--unstable", "src/index-t.ts", "dist/index.js"],
+//     stdout: 'null',
+//     stdin: 'null',
+//     stderr: 'null',
+//   }).status();
+// }
+
+function build() {
+  return Promise.resolve(
+    src("src/**/*.ts").pipeTo(dest("dist")),
+  );
 }
 
 interface Tasks {
