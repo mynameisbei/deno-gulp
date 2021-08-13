@@ -67,3 +67,4 @@ typings/
 test.xunit
 
 .vscode
+dist

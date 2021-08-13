@@ -10,9 +10,8 @@ import { clean, dest, series, src, Task } from "../src/index.ts";
 // }
 
 function build() {
-  return Promise.resolve(
-    src("src/**/*.ts").pipeTo(dest("dist")),
-  );
+  src("src/*").pipeTo(dest("dist"));
+  return Promise.resolve();
 }
 
 interface Tasks {

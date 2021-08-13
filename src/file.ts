@@ -9,9 +9,13 @@ import {
   ParsedPath,
   relative,
 } from "https://deno.land/std@0.104.0/path/mod.ts";
+import {
+  readableStreamFromReader,
+  writableStreamFromWriter
+} from "https://deno.land/std@0.104.0/io/mod.ts";
 
 export interface FileData extends ParsedPath {
-  data: Uint8Array;
+  data: ReadableStream;
 }
 
 export type FileDataStream = TransformStream<FileData, FileData>;
@@ -21,8 +25,10 @@ export function src(glob: string): ReadableStream<FileData> {
   return new ReadableStream({
     async pull(controller) {
       for await (const { path } of result) {
+        const file = await Deno.open(path, { read: true, });
+        const stream = readableStreamFromReader(file);
         controller.enqueue({
-          data: await Deno.readFile(path),
+          data: stream,
           ...parse(relative(Deno.cwd(), path)),
         });
       }
@@ -32,7 +38,7 @@ export function src(glob: string): ReadableStream<FileData> {
 
 export function dest(path: string) {
   return new WritableStream({
-    async write(fileData) {
+    async write(fileData: FileData) {
       await ensureDir(path);
       const { data, ...pathData } = fileData;
       const currentPath = format({
@@ -40,7 +46,10 @@ export function dest(path: string) {
         dir: path,
       });
 
-      return Deno.writeFile(currentPath, data);
+      const file = await Deno.open(currentPath, { write: true, create: true });
+      const stream = writableStreamFromWriter(file);
+      return data.pipeTo(stream);
+      // return Deno.writeFile(currentPath, data);
     }
   });
 }
